@@ -913,3 +913,75 @@ window.deleteVoiceNote = function(index) {
         alert("🗑️ تم حذف الرسالة الصوتية بنجاح ومزامنته أونلاين!");
     }
 }
+// --- كود لعبة البينجو المشترك ---
+let currentBingoPlayer = 'بوو 🌸';
+let bingoSelections = JSON.parse(localStorage.getItem('couple_bingo_state') || '{}');
+
+function setBingoPlayer(player) {
+    currentBingoPlayer = player;
+    document.getElementById('bingo-btn-boo').style.background = (player === 'بوو 🌸') ? 'var(--accent-primary)' : 'rgba(255,255,255,0.05)';
+    document.getElementById('bingo-btn-boo').style.color = (player === 'بوو 🌸') ? '#fff' : 'var(--text-color)';
+    
+    document.getElementById('bingo-btn-shelby').style.background = (player === 'شلبي 🤖') ? 'var(--accent-primary)' : 'rgba(255,255,255,0.05)';
+    document.getElementById('bingo-btn-shelby').style.color = (player === 'شلبي 🤖') ? '#fff' : 'var(--text-color)';
+    
+    document.getElementById('bingo-status').textContent = `أنتِ الآن تلعبين بصفة: ${player}`;
+    renderBingoBoard();
+}
+
+function toggleBingoCell(index) {
+    if (!bingoSelections[currentBingoPlayer]) {
+        bingoSelections[currentBingoPlayer] = [];
+    }
+    
+    let playerList = bingoSelections[currentBingoPlayer];
+    let pos = playerList.indexOf(index);
+    
+    if (pos > -1) {
+        playerList.splice(pos, 1); // إلغاء الاختيار
+    } else {
+        playerList.push(index); // اختيار المربع
+    }
+    
+    localStorage.setItem('couple_bingo_state', JSON.stringify(bingoSelections));
+    renderBingoBoard();
+
+    // تسجيل في السجل الذكي إذا أردت
+    if (typeof logBooAction === 'function' && currentBingoPlayer === 'بوو 🌸') {
+        logBooAction(`لعبت البينجو واختارَت مربعات جديدة ✨`);
+    }
+}
+
+function renderBingoBoard() {
+    let cells = document.querySelectorAll('.bingo-cell');
+    let activeList = bingoSelections[currentBingoPlayer] || [];
+    let totalCount = 0;
+
+    cells.forEach((cell, idx) => {
+        if (activeList.includes(idx)) {
+            cell.style.background = 'rgba(236, 72, 153, 0.2)';
+            cell.style.borderColor = 'var(--accent-secondary)';
+            cell.style.color = 'var(--accent-secondary)';
+            cell.style.fontWeight = 'bold';
+            totalCount++;
+        } else {
+            cell.style.background = 'rgba(255,255,255,0.03)';
+            cell.style.borderColor = 'var(--glass-border)';
+            cell.style.color = 'var(--text-color)';
+            cell.style.fontWeight = 'normal';
+        }
+    });
+
+    document.getElementById('bingo-score-text').textContent = `مربعات (${currentBingoPlayer}) المختارة: ${totalCount} / 9`;
+}
+
+function resetBingo() {
+    bingoSelections[currentBingoPlayer] = [];
+    localStorage.setItem('couple_bingo_state', JSON.stringify(bingoSelections));
+    renderBingoBoard();
+}
+
+// تنفيذ عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    renderBingoBoard();
+});
