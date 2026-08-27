@@ -188,6 +188,7 @@
                     <li class="nav-item"><a href="#song" class="nav-link">أغنيتنا</a></li>
                     <li class="nav-item"><a href="#quiz-section" class="nav-link">الاختبار</a></li>
                     <li class="nav-item"><a href="#xo-challenge" class="nav-link">تحدي XO</a></li>
+                    <li class="nav-item"><a href="#couple-bingo" class="nav-link">بينجو</a></li>
                     <li class="nav-item"><a href="#surprises" class="nav-link">مغامراتنا</a></li>
                     <li class="nav-item"><a href="#pamper" class="nav-link">مساحة الدلال</a></li>
                     <li class="nav-item"><a href="#secret" class="nav-link">رسالة خاصة</a></li>
@@ -357,7 +358,7 @@
                                 <input type="number" id="new-correct-idx" min="1" max="4" value="1" style="width: 100%; padding: 6px; border-radius: 8px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); color: white; text-align: center;">
                                 <button onclick="addNewQuestionToBank()" class="btn btn-primary" style="margin-top: 5px; padding: 8px;">حفظ وإضافة السؤال 🚀</button>
                             </div>
-                            <!-- زر وحفظ وحذف الأسئلة -->
+                            <!-- زر إدارة وحذف الأسئلة -->
                             <div style="margin-top: 15px; text-align: right;">
                                 <button onclick="toggleManageQuestions()" class="btn" style="background: rgba(255,255,255,0.03); border: 1px dashed var(--glass-border); color: var(--text-muted); font-size: 0.8rem; padding: 6px 12px;">⚙️ إدارة وحذف الأسئلة المضافة</button>
                                 <div id="manage-questions-box" style="display: none; margin-top: 10px; max-height: 150px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; border: 1px solid var(--glass-border);">
@@ -418,6 +419,44 @@
             </div>
         </section>
 
+        <!-- Couple Bingo Section -->
+        <section class="game section" id="couple-bingo">
+            <div class="container">
+                <div class="section-header reveal">
+                    <h2 class="section-title">🧩 بينجو <span class="accent">شلبي وبوو</span></h2>
+                    <p class="section-subtitle">اضغطي على المربعات اللي بتصفيكِ أو بتصفيه.. تعالي نشوف كام حاجة شبه بعض! 😉</p>
+                </div>
+                <div class="game-container reveal" style="display: flex; justify-content: center;">
+                    <div class="glass-card" style="width: 100%; max-width: 500px; padding: 30px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                        
+                        <div style="display: flex; gap: 10px; width: 100%; justify-content: center; margin-bottom: 5px;">
+                            <button onclick="setBingoPlayer('بوو 🌸')" id="bingo-btn-boo" class="btn btn-primary" style="font-size: 0.85rem; padding: 8px 15px;">أنا بوو 🌸</button>
+                            <button onclick="setBingoPlayer('شلبي 🤖')" id="bingo-btn-shelby" class="btn" style="font-size: 0.85rem; padding: 8px 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); color: var(--text-color);">أنا شلبي 🤖</button>
+                        </div>
+                        <div id="bingo-status" style="font-size: 0.9rem; color: var(--accent-primary); font-weight: bold;">اختاري أنتِ مين دلوقتي عشان تلعبي البينجو ✨</div>
+
+                        <!-- شبكة البينجو -->
+                        <div class="bingo-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%;">
+                            <div class="bingo-cell" onclick="toggleBingoCell(0)" data-index="0" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 10px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 80px;">بينام متأخر جداً 🌙</div>
+                            <div class="bingo-cell" onclick="toggleBingoCell(1)" data-index="1" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 10px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 80px;">عشاق الشوكولاتة 🍫</div>
+                            <div class="bingo-cell" onclick="toggleBingoCell(2)" data-index="2" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 10px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 80px;">بيحب الكلام الصبح بدري ☀️</div>
+                            
+                            <div class="bingo-cell" onclick="toggleBingoCell(3)" data-index="3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 10px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 80px;">بيتعصب لو الجوع سأله 🍔</div>
+                            <div class="bingo-cell" onclick="toggleBingoCell(4)" data-index="4" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 10px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 80px;">بيحب الأغاني الهادية 🎶</div>
+                            <div class="bingo-cell" onclick="toggleBingoCell(5)" data-index="5" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 10px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 80px;">ينسى الموبايل صامت 📳</div>
+                            
+                            <div class="bingo-cell" onclick="toggleBingoCell(6)" data-index="6" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 10px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 80px;">بيحب السفر والمغامرات 🇨🇭</div>
+                            <div class="bingo-cell" onclick="toggleBingoCell(7)" data-index="7" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 10px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 80px;">عنده ضحكة مميزة 😂</div>
+                            <div class="bingo-cell" onclick="toggleBingoCell(8)" data-index="8" style="background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); padding: 15px 10px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; transition: var(--transition); display: flex; align-items: center; justify-content: center; text-align: center; min-height: 80px;">بيحب التاني بجنون ❤️</div>
+                        </div>
+
+                        <div id="bingo-score-text" style="font-size: 0.95rem; color: var(--text-color); font-weight: 500;">المربعات المختارة: 0 / 9</div>
+                        <button class="btn btn-primary" onclick="resetBingo()" style="padding: 8px 20px; font-size: 0.85rem; width: 100%;">إعادة ضبط البينجو 🔄</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- مغامرات شلبي وبوو -->
         <section class="surprises section" id="surprises">
             <div class="container">
@@ -427,30 +466,29 @@
                 </div>
                 <div class="surprises-grid grid reveal" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
                     
-                   
-<!-- 1. صندوق الرسائل الصوتية المطور (تسجيل مباشر من الموقع) -->
+                   <!-- 1. صندوق الرسائل الصوتية المطور -->
                     <div class="glass-card" style="padding: 25px; text-align: center;">
                         <h3 class="accent" style="font-size: 1.3rem; margin-bottom: 12px;"><i class="fa-solid fa-microphone-lines"></i> استوديو الفويس نوتس 🎙️</h3>
                         <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">سجل رسالة صوتية جديدة بصوتك لتسمعها بوو:</p>
                         
-                        <!-- أزرار التسجيل -->
                         <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
                             <button id="start-record-btn" onclick="startAudioRecording()" class="btn btn-primary" style="padding: 8px 15px; font-size: 0.85rem; background: #ef4444;"><i class="fa-solid fa-circle"></i> ابدأ التسجيل 🔴</button>
                             <button id="stop-record-btn" onclick="stopAudioRecording()" class="btn" style="padding: 8px 15px; font-size: 0.85rem; background: rgba(255,255,255,0.1); color: white; border: 1px solid var(--glass-border);" disabled>إيقاف وحفظ ⏹️</button>
                         </div>
                         <div id="recording-status" style="font-size: 0.85rem; color: var(--accent-primary); margin-bottom: 10px; min-height: 20px;">الميكروفون جاهز 🎧</div>
 
-                        <!-- قائمة الفويس نوتس المسجلة والمحفوظة سحابياً -->
                         <div id="voice-notes-shelf" style="display: flex; flex-direction: column; gap: 10px; max-height: 180px; overflow-y: auto; text-align: right; margin-top: 10px;">
                             <div style="color: var(--text-muted); text-align: center; font-size: 0.85rem;">لا توجد رسائل صوتية مسجلة حتى الآن ✨</div>
                         </div>
-                    </div><!-- زر إدارة وحذف الرسائل الصوتية -->
-                        <div style="margin-top: 10px; text-align: right;">
-                            <button onclick="toggleManageVoiceNotes()" class="btn" style="background: rgba(255,255,255,0.03); border: 1px dashed var(--glass-border); color: var(--text-muted); font-size: 0.75rem; padding: 4px 10px;">⚙️ إدارة وحذف الرسائل الصوتية</button>
-                            <div id="manage-voicerecords-box" style="display: none; margin-top: 8px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border);">
-                                <div id="voicerecords-list-admin" style="font-size: 0.8rem; color: var(--text-color); display: flex; flex-direction: column; gap: 5px;"></div>
-                            </div>
+                    </div>
+                    
+                    <div style="margin-top: 10px; text-align: right;">
+                        <button onclick="toggleManageVoiceNotes()" class="btn" style="background: rgba(255,255,255,0.03); border: 1px dashed var(--glass-border); color: var(--text-muted); font-size: 0.75rem; padding: 4px 10px;">⚙️ إدارة وحذف الرسائل الصوتية</button>
+                        <div id="manage-voicerecords-box" style="display: none; margin-top: 8px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border);">
+                            <div id="voicerecords-list-admin" style="font-size: 0.8rem; color: var(--text-color); display: flex; flex-direction: column; gap: 5px;"></div>
                         </div>
+                    </div>
+
                     <!-- 2. تذكرة السفر إلى سويسرا -->
                     <div class="glass-card" style="padding: 25px; text-align: center; border: 2px solid var(--accent-primary); background: linear-gradient(135deg, rgba(56,189,248,0.05), rgba(236,72,153,0.05));">
                         <h3 class="accent" style="font-size: 1.3rem; margin-bottom: 10px;"><i class="fa-solid fa-plane-up"></i> تذكرة رحلتنا إلى سويسرا 🇨🇭</h3>
@@ -514,12 +552,14 @@
                             <div style="color: var(--text-muted); text-align: center; padding: 10px;">لا توجد كبسولات مسجلة على الرف حتى الآن ✨</div>
                         </div>
                     </div>
-<div style="margin-top: 10px; text-align: right;">
-    <button onclick="toggleManageCapsules()" class="btn" style="background: rgba(255,255,255,0.03); border: 1px dashed var(--glass-border); color: var(--text-muted); font-size: 0.75rem; padding: 4px 10px;">⚙️ إدارة وحذف كبسولات الوقت</button>
-    <div id="manage-capsules-box" style="display: none; margin-top: 8px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border);">
-        <div id="capsules-list-admin" style="font-size: 0.8rem; color: var(--text-color); display: flex; flex-direction: column; gap: 5px;"></div>
-    </div>
-</div>
+                    
+                    <div style="margin-top: 10px; text-align: right;">
+                        <button onclick="toggleManageCapsules()" class="btn" style="background: rgba(255,255,255,0.03); border: 1px dashed var(--glass-border); color: var(--text-muted); font-size: 0.75rem; padding: 4px 10px;">⚙️ إدارة وحذف كبسولات الوقت</button>
+                        <div id="manage-capsules-box" style="display: none; margin-top: 8px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border);">
+                            <div id="capsules-list-admin" style="font-size: 0.8rem; color: var(--text-color); display: flex; flex-direction: column; gap: 5px;"></div>
+                        </div>
+                    </div>
+
                     <!-- صندوق الوعود والعهود -->
                     <div class="glass-card" style="padding: 25px; text-align: center;">
                         <h3 class="accent" style="font-size: 1.3rem; margin-bottom: 12px;"><i class="fa-solid fa-ring"></i> صندوق الوعود والعهود 💍✨</h3>
@@ -538,12 +578,14 @@
                             <li style="color: var(--text-muted); text-align: center;">العهود والوعود ستظهر هنا... ✨</li>
                         </ul>
                     </div>
-<div style="margin-top: 10px; text-align: right;">
-    <button onclick="toggleManagePromises()" class="btn" style="background: rgba(255,255,255,0.03); border: 1px dashed var(--glass-border); color: var(--text-muted); font-size: 0.75rem; padding: 4px 10px;">⚙️ إدارة وحذف الوعود</button>
-    <div id="manage-promises-box" style="display: none; margin-top: 8px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border);">
-        <div id="promises-list-admin" style="font-size: 0.8rem; color: var(--text-color); display: flex; flex-direction: column; gap: 5px;"></div>
-    </div>
-</div>
+                    
+                    <div style="margin-top: 10px; text-align: right;">
+                        <button onclick="toggleManagePromises()" class="btn" style="background: rgba(255,255,255,0.03); border: 1px dashed var(--glass-border); color: var(--text-muted); font-size: 0.75rem; padding: 4px 10px;">⚙️ إدارة وحذف الوعود</button>
+                        <div id="manage-promises-box" style="display: none; margin-top: 8px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border);">
+                            <div id="promises-list-admin" style="font-size: 0.8rem; color: var(--text-color); display: flex; flex-direction: column; gap: 5px;"></div>
+                        </div>
+                    </div>
+
                     <!-- زجاجة الأمنيات السرية -->
                     <div class="glass-card" style="padding: 25px; text-align: center; grid-column: 1 / -1; max-width: 600px; margin: 0 auto; width: 100%;">
                         <h3 class="accent" style="font-size: 1.3rem; margin-bottom: 12px;"><i class="fa-solid fa-bottle-droplet"></i> زجاجة الأمنيات السرية 🍾✨</h3>
@@ -560,12 +602,14 @@
                 </div>
             </div>
         </section>
-<div style="margin-top: 10px; text-align: right;">
-    <button onclick="toggleManageWishes()" class="btn" style="background: rgba(255,255,255,0.03); border: 1px dashed var(--glass-border); color: var(--text-muted); font-size: 0.75rem; padding: 4px 10px;">⚙️ إدارة وحذف الأمنيات</button>
-    <div id="manage-wishes-box" style="display: none; margin-top: 8px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border);">
-        <div id="wishes-list-admin" style="font-size: 0.8rem; color: var(--text-color); display: flex; flex-direction: column; gap: 5px;"></div>
-    </div>
-</div>
+
+        <div style="margin-top: 10px; text-align: right;">
+            <button onclick="toggleManageWishes()" class="btn" style="background: rgba(255,255,255,0.03); border: 1px dashed var(--glass-border); color: var(--text-muted); font-size: 0.75rem; padding: 4px 10px;">⚙️ إدارة وحذف الأمنيات</button>
+            <div id="manage-wishes-box" style="display: none; margin-top: 8px; max-height: 120px; overflow-y: auto; background: rgba(0,0,0,0.2); padding: 8px; border-radius: 8px; border: 1px solid var(--glass-border);">
+                <div id="wishes-list-admin" style="font-size: 0.8rem; color: var(--text-color); display: flex; flex-direction: column; gap: 5px;"></div>
+            </div>
+        </div>
+
         <!-- Pamper Section -->
         <section class="pamper section" id="pamper">
             <div class="container">
@@ -676,7 +720,6 @@
         const db = getDatabase(app);
         const dataRef = ref(db, 'shelby_boo_data');
 
-        // الاستماع الفوري للتحديثات من القاعدة المشتركة لكافة الأقسام (أسئلة، أمنيات، وعود، كبسولات)
         onValue(dataRef, (snapshot) => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
@@ -709,7 +752,6 @@
             }
         });
 
-        // دالة موحدة لتحديث السيرفر السحابي بأي بيانات جديدة دون مسح باقي الأقسام
         window.updateCloudData = async function(newData) {
             try {
                 let currentData = {
